@@ -39,7 +39,7 @@ elif selected == "Modify":
 
 mydb = mysql.connect(host="localhost",
                    user="root",
-                   password="Tp@1708s",
+                   password="******",
                    database= "BizcardX"
                   )
 mycursor = mydb.cursor(buffered=True)
