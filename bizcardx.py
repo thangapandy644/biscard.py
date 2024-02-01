@@ -138,12 +138,16 @@ elif choice == 'Update':
     website = st.text_input("Website", result[7])
     company_name = st.text_input("Company Name", result[8])
     # Create a button to update the business card
-    #if st.button("Update Business Card"):
+    if st.button("Update Business Card"):
+     try:
         # Update the information for the selected business card in the database
-        #mycursor.execute("UPDATE card_data SET name=%s, job_title=%s, address=%s, postcode=%s, phone=%s, email=%s, website=%s, company_name=%s WHERE name=%s", 
-       #(name, job_title, address, postcode, phone, email, website, company_name, selected_card_name))
-        #mydb.commit()
+        sql_query = "UPDATE card_data SET name=%s, job_title=%s, address=%s, postcode=%s, phone=%s, email=%s, website=%s, company_name=%s WHERE name=%s"
+        data = (name, job_title, address, postcode, phone, email, website, company_name, selected_card_name)
+        mycursor.execute(sql_query, data)
+        mydb.commit()
         st.success("Business card information updated in database.")
+     except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
 elif choice == 'Delete':
     # Create a dropdown menu to select a business card to delete
     mycursor.execute("SELECT id, name FROM card_data")
